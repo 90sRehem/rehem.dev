@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { projects } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.href.split('/').filter(Boolean).at(-1) },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={`${project.title} — Projetos — Rehem`} description={project.description}>
+  <article class="site-shell py-20 sm:py-28">
+    <a href="/projects/" class="font-mono text-xs uppercase tracking-wider text-muted hover:text-teal">← voltar para projetos</a>
+    <div class="mt-10 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+      <div>
+        <p class="eyebrow mb-4 text-yellow">{project.type}</p>
+        <h1 class="section-title text-paper">{project.title}<span class="text-teal">.</span></h1>
+        <p class="mt-7 max-w-lg text-xl leading-8 text-muted">{project.description}</p>
+      </div>
+      <img src={project.image} alt={`Arte visual do projeto ${project.title}`} width="800" height="500" class="brutal-card w-full bg-panel" />
+    </div>
+    <div class="mt-16 grid gap-10 border-t-2 border-paper/20 pt-10 md:grid-cols-[0.7fr_1.3fr]">
+      <div>
+        <p class="eyebrow mb-4">o que entrou na mesa</p>
+        <div class="flex flex-wrap gap-2">{project.tags.map((tag) => <span class="border border-paper/30 px-2 py-1 font-mono text-xs uppercase text-paper/70">{tag}</span>)}</div>
+      </div>
+      <div class="prose-rehem max-w-2xl">
+        <p>Projetos bons não são uma linha reta. Este case é um ponto de partida para contar como uma ideia ganhou contorno, como as decisões foram tomadas e o que ficou melhor depois de colocar tudo para funcionar.</p>
+        <h2>Clareza antes de acabamento</h2>
+        <p>Começamos reduzindo a pergunta até ela ficar pequena o suficiente para ser respondida. Depois, testamos a resposta em baixa fidelidade, ouvimos as pessoas certas e só então investimos no detalhe.</p>
+        <p>O resultado é uma experiência com menos enfeite e mais intenção: cada bloco tem uma função, cada estado comunica alguma coisa e o código sustenta o que a interface promete.</p>
+      </div>
+    </div>
+  </article>
+</Layout>

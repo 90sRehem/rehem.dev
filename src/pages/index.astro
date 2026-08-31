@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects';
+import { services } from '../data/services';
+
+const featuredProjects = projects.filter((project) => project.featured);
+---
+
+<Layout
+  title="Rehem — produtos digitais com intenção"
+  description="Rehem cria produtos digitais, interfaces e sistemas visuais para ideias que merecem ganhar forma."
+>
+  <section class="site-shell grid min-h-[calc(100vh-5rem)] items-center py-20 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16 lg:py-28">
+    <div>
+      <div class="mb-8 flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-muted">
+        <span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-teal"></span>
+        disponível para projetos selecionados
+      </div>
+      <h1 class="display-title text-paper">Ideias boas<br /><span class="text-teal">pedem forma.</span></h1>
+      <p class="mt-8 max-w-xl text-lg leading-8 text-muted sm:text-xl">Sou Rehem — designer e developer interessado no espaço entre uma pergunta difícil e um produto que realmente ajuda alguém.</p>
+      <div class="mt-10 flex flex-wrap gap-5">
+        <a class="brutal-button" href="/projects/">Ver projetos <span aria-hidden="true">↗</span></a>
+        <a class="brutal-button brutal-button-secondary" href="/contact/">Vamos conversar <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="relative mt-12 lg:mt-0">
+      <div class="grid-lines brutal-card relative mx-auto aspect-square max-w-[410px] bg-teal p-6 sm:p-10">
+        <div class="flex h-full flex-col justify-between border-2 border-ink bg-panel p-5 sm:p-7">
+          <div class="flex justify-between font-mono text-xs text-teal"><span>RHM—001</span><span>↘ 2025</span></div>
+          <div>
+            <p class="font-mono text-xs uppercase tracking-widest text-yellow">não é só pixels</p>
+            <p class="mt-3 text-5xl font-black leading-[0.85] tracking-[-0.09em] text-paper sm:text-7xl">é<br />direção<span class="text-teal">.</span></p>
+          </div>
+          <div class="flex items-end justify-between border-t border-paper/30 pt-4 font-mono text-[0.65rem] uppercase text-muted"><span>design / code / care</span><span>✳</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="overflow-hidden border-y-2 border-paper/20 bg-panel py-4">
+    <div class="site-shell flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs uppercase tracking-[0.15em] text-muted">
+      <span class="text-teal">◆ produto</span><span>interface</span><span class="text-yellow">◆ estratégia</span><span>código</span><span class="text-teal">◆ conteúdo</span><span>curiosidade</span>
+    </div>
+  </div>
+
+  <section class="site-shell py-24 sm:py-32">
+    <div class="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+      <div>
+        <p class="eyebrow mb-4">01 / trabalho recente</p>
+        <h2 class="section-title text-paper">Feito para<br /><span class="text-teal">ser usado.</span></h2>
+      </div>
+      <a href="/projects/" class="font-mono text-xs font-bold uppercase tracking-wider text-paper underline decoration-teal decoration-2 underline-offset-4 hover:text-teal">Ver todos os projetos ↗</a>
+    </div>
+    <div class="grid gap-8 md:grid-cols-2">
+      {featuredProjects.map((project) => <ProjectCard {...project} />)}
+    </div>
+  </section>
+
+  <section class="border-y-2 border-paper/20 bg-panel">
+    <div class="site-shell grid gap-12 py-20 lg:grid-cols-[0.7fr_1.3fr] lg:py-28">
+      <div>
+        <p class="eyebrow mb-4">02 / como eu trabalho</p>
+        <h2 class="section-title text-paper">Menos<br /><span class="text-yellow">ruído.</span></h2>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-3">
+        {services.map((service) => (
+          <div class="border-2 border-paper/30 p-5">
+            <p class="font-mono text-sm text-teal">{service.number}</p>
+            <h3 class="mt-10 text-xl font-black tracking-[-0.04em] text-paper">{service.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-muted">{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="site-shell py-24 sm:py-32">
+    <div class="brutal-card-yellow grid gap-10 bg-panel p-6 sm:p-10 lg:grid-cols-[1fr_0.8fr] lg:p-14">
+      <div>
+        <p class="eyebrow mb-4 text-yellow">03 / próxima conversa</p>
+        <h2 class="section-title text-paper">Tem algo<br /><span class="text-teal">em mente?</span></h2>
+      </div>
+      <div class="flex flex-col justify-end items-start">
+        <p class="max-w-md leading-7 text-muted">Se você está no começo de uma ideia ou no meio de um problema teimoso, me escreva. A primeira conversa é por minha conta.</p>
+        <a class="brutal-button mt-8" href="/contact/">Falar sobre o projeto <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+</Layout>

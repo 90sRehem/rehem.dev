@@ -1,0 +1,34 @@
+---
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/projects/', label: 'Projetos' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/about/', label: 'Sobre' },
+  { href: '/contact/', label: 'Contato' },
+];
+const currentPath = Astro.url.pathname;
+---
+
+<header class="border-b-2 border-paper/20">
+  <div class="site-shell flex min-h-20 flex-wrap items-center justify-between gap-4 py-4">
+    <a href="/" class="font-mono text-lg font-bold tracking-[-0.08em]" aria-label="rehem.dev, início">
+      <span class="text-teal">rehem</span><span class="text-paper">.dev</span>
+    </a>
+    <nav aria-label="Navegação principal">
+      <ul class="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 font-mono text-[0.7rem] font-bold uppercase tracking-[0.06em] text-muted sm:gap-x-6">
+        {links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                'transition-colors hover:text-teal',
+                currentPath === link.href ? 'text-paper underline decoration-teal decoration-2 underline-offset-4' : '',
+              ]}
+              aria-current={currentPath === link.href ? 'page' : undefined}
+            >{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
