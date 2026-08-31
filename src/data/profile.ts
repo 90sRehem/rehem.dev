@@ -4,7 +4,7 @@ export const profile = {
   focus: 'AI Engineering · Developer Productivity',
   location: 'Rio de Janeiro, Brasil',
   summary:
-    'Engenheiro de software sênior, desenvolvedor desde 2020. Trabalho com AI Engineering, Developer Productivity e desenvolvimento Full Stack com React, Node.js, React Native e AWS.'
+    'Engenheiro de software sênior, desenvolvedor desde 2020. Trabalho com AI Engineering, Developer Productivity e desenvolvimento Full Stack com React, Node.js, React Native e AWS.',
   email: 'hello@rehem.dev',
   social: {
     github: 'https://github.com/90sRehem',
