@@ -24,6 +24,7 @@ componentes Astro.
 - Perfil, bio e links sociais: `src/data/profile.ts`.
 - Projetos e contribuições: `src/data/projects.ts`.
 - Stack técnico: `src/data/stack.ts`.
+- Blog e posts em Markdown: `src/content/blog/*.md` e as rotas em `/blog/`.
 
 Todo o conteúdo é real — sem projetos fictícios, sem timeline de experiência
 (isso já existe no LinkedIn).
