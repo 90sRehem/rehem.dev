@@ -52,8 +52,11 @@ deployments.
 
 Um workflow do GitHub Actions (`.github/workflows/terraform.yml`) roda
 `terraform plan` em pull requests que tocam `infra/` e `terraform apply`
-automaticamente em push para `main`. Requer os secrets `CLOUDFLARE_API_TOKEN`
-e `CLOUDFLARE_ACCOUNT_ID` configurados no repositório.
+automaticamente em push para `main`. Requer os secrets `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` e
+`TF_API_TOKEN`, além das variáveis de repositório `TF_ORGANIZATION` e
+`TF_WORKSPACE`. O estado é armazenado no workspace remoto do Terraform Cloud;
+crie esse workspace antes do primeiro deploy. Em pull requests de forks, o
+workflow executa apenas validações quando os secrets não estão disponíveis.
 
 ### Deploy manual (fallback)
 
