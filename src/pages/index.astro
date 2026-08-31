@@ -29,10 +29,10 @@ const githubChartUrl = `https://ghchart.rshah.org/00d4aa/${profile.social.github
     <div class="relative mt-12 lg:mt-0">
       <div class="grid-lines brutal-card relative mx-auto aspect-square max-w-[410px] bg-teal p-6 sm:p-10">
         <div class="flex h-full flex-col justify-between border-2 border-ink bg-panel p-5 sm:p-7">
-          <div class="flex justify-between font-mono text-xs text-teal"><span>~/rehem</span><span>6+ anos</span></div>
+          <div class="flex justify-between font-mono text-xs text-teal"><span>~/rehem</span><span>dev desde 2020</span></div>
           <div>
             <p class="font-mono text-xs uppercase tracking-widest text-yellow">$ whoami</p>
-            <p class="mt-3 text-4xl font-black leading-[0.9] tracking-[-0.07em] text-paper sm:text-5xl">Exército<br />→ código<br />→ <span class="text-teal">IA</span>.</p>
+            <p class="mt-3 text-4xl font-black leading-[0.9] tracking-[-0.07em] text-paper sm:text-5xl">Código<br />→ produto<br />→ <span class="text-teal">IA</span>.</p>
           </div>
           <div class="flex items-end justify-between border-t border-paper/30 pt-4 font-mono text-[0.65rem] uppercase text-muted"><span>ai engineering / dev productivity</span><span>✳</span></div>
         </div>
@@ -43,7 +43,7 @@ const githubChartUrl = `https://ghchart.rshah.org/00d4aa/${profile.social.github
   <section id="projetos" class="site-shell scroll-mt-20 py-24 sm:py-32">
     <p class="eyebrow mb-4">01 / projetos</p>
     <h2 class="section-title text-paper">Código que<br /><span class="text-teal">fala por si.</span></h2>
-    <p class="mt-6 max-w-2xl text-lg leading-7 text-muted">Uma seleção de repositórios próprios e contribuições ativas em projetos open source.</p>
+    <p class="mt-6 max-w-2xl text-lg leading-7 text-muted">Uma seleção de repositórios próprios e contribuições em projetos open source.</p>
     <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {projects.map((project) => <ProjectCard {...project} />)}
     </div>
@@ -53,6 +53,7 @@ const githubChartUrl = `https://ghchart.rshah.org/00d4aa/${profile.social.github
     <div class="site-shell scroll-mt-20 py-20 sm:py-28">
       <p class="eyebrow mb-4">02 / stack</p>
       <h2 class="section-title text-paper">Ferramentas<br /><span class="text-yellow">do dia a dia.</span></h2>
+      <p class="mt-6 max-w-2xl text-lg leading-7 text-muted">Tenho experiência desenhando microservices e modular monoliths, além de trabalhar com microfrontends quando o produto pede essa divisão.</p>
       <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {stack.map((group, index) => <StackGroup category={group.category} items={group.items} index={index} />)}
       </div>
@@ -93,7 +94,7 @@ const githubChartUrl = `https://ghchart.rshah.org/00d4aa/${profile.social.github
     <div class="site-shell scroll-mt-20 grid gap-12 py-20 sm:py-28 lg:grid-cols-[0.7fr_1.3fr]">
       <div>
         <p class="eyebrow mb-4">04 / sobre</p>
-        <h2 class="section-title text-paper">Do quartel<br /><span class="text-yellow">ao terminal.</span></h2>
+        <h2 class="section-title text-paper">Do código<br /><span class="text-yellow">à IA.</span></h2>
       </div>
       <div class="max-w-2xl space-y-5 text-lg leading-8 text-muted">
         {bio.map((paragraph) => <p>{paragraph}</p>)}
