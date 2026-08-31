@@ -27,6 +27,6 @@ O build gera os arquivos em `dist/`, prontos para Cloudflare Pages. O comando
 - SEO: o sitemap é gerado pelo `@astrojs/sitemap`; metadados e Open Graph ficam
   no layout compartilhado.
 
-O formulário de contato usa o FormSubmit e envia para `hello@rehem.dev`. Na
-primeira utilização, o endereço precisa confirmar a ativação recebida por
-email.
+O formulário de contato usa o FormSubmit e envia para `hello@rehem.dev`. Após
+o envio, você será redirecionado para uma página de confirmação. Na primeira
+utilização, o endereço precisa confirmar a ativação recebida por email.
