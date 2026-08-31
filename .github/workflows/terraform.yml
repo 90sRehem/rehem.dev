@@ -24,6 +24,7 @@ jobs:
       TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
       TF_ORGANIZATION: ${{ vars.TF_ORGANIZATION }}
       TF_WORKSPACE: ${{ vars.TF_WORKSPACE }}
+      TF_TRUSTED_PR: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
       - uses: actions/checkout@v4
 
@@ -37,7 +38,7 @@ jobs:
       - name: Terraform init
         shell: bash
         run: |
-          if [ "$GITHUB_EVENT_NAME" = "push" ] && [ "$GITHUB_REF" = "refs/heads/main" ]; then
+          if { [ "$GITHUB_EVENT_NAME" = "push" ] && [ "$GITHUB_REF" = "refs/heads/main" ]; } || [ "$TF_TRUSTED_PR" = "true" ]; then
             if [ -z "$TF_TOKEN_app_terraform_io" ] || [ -z "$TF_ORGANIZATION" ] || [ -z "$TF_WORKSPACE" ]; then
               echo "Terraform Cloud backend configuration is required for main deployments."
               exit 1

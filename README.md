@@ -40,22 +40,27 @@ terraform init
 terraform apply
 ```
 
+Antes do primeiro apply, conecte a conta GitHub ao Cloudflare em **Workers & Pages →
+Create application → Pages → Connect to Git**. Essa autorização é necessária
+para um projeto Pages com origem GitHub e não é criada pelo Terraform.
+
 Requer um token de API da Cloudflare com permissão `Pages:Edit` e o ID da
 conta Cloudflare. Passe-os como variáveis de ambiente (`TF_VAR_cloudflare_api_token`,
 `TF_VAR_cloudflare_account_id`) ou copie `terraform.tfvars.example` para
 `terraform.tfvars` (gitignored) e preencha os valores.
 
-O `terraform apply` cria o projeto Cloudflare Pages e conecta ao repositório
-GitHub `90sRehem/rehem.dev`; a partir daí, todo push na branch `main` dispara
-um deploy de produção automaticamente, e outras branches/PRs geram preview
-deployments.
+Depois dessa conexão, o `terraform apply` cria o projeto Cloudflare Pages e o
+conecta ao repositório GitHub `90sRehem/rehem.dev`; a partir daí, todo push na
+branch `main` dispara um deploy de produção automaticamente, e outras
+branches/PRs geram preview deployments.
 
 Um workflow do GitHub Actions (`.github/workflows/terraform.yml`) roda
 `terraform plan` em pull requests que tocam `infra/` e `terraform apply`
 automaticamente em push para `main`. Requer os secrets `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` e
 `TF_API_TOKEN`, além das variáveis de repositório `TF_ORGANIZATION` e
 `TF_WORKSPACE`. O estado é armazenado no workspace remoto do Terraform Cloud;
-crie esse workspace antes do primeiro deploy. Em pull requests de forks, o
+crie esse workspace antes do primeiro deploy. A conexão GitHub com o Cloudflare
+continua sendo uma configuração externa obrigatória. Em pull requests de forks, o
 workflow executa apenas validações quando os secrets não estão disponíveis.
 
 ### Deploy manual (fallback)
