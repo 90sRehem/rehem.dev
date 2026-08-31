@@ -1,12 +1,12 @@
 ---
+import { profile } from '../data/profile';
+
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/projects/', label: 'Projetos' },
-  { href: '/blog/', label: 'Blog' },
-  { href: '/about/', label: 'Sobre' },
-  { href: '/contact/', label: 'Contato' },
+  { href: '#projetos', label: 'Projetos' },
+  { href: '#stack', label: 'Stack' },
+  { href: '#sobre', label: 'Sobre' },
+  { href: '#contato', label: 'Contato' },
 ];
-const currentPath = Astro.url.pathname;
 ---
 
 <header class="border-b-2 border-paper/20">
@@ -18,16 +18,12 @@ const currentPath = Astro.url.pathname;
       <ul class="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 font-mono text-[0.7rem] font-bold uppercase tracking-[0.06em] text-muted sm:gap-x-6">
         {links.map((link) => (
           <li>
-            <a
-              href={link.href}
-              class:list={[
-                'transition-colors hover:text-teal',
-                currentPath === link.href ? 'text-paper underline decoration-teal decoration-2 underline-offset-4' : '',
-              ]}
-              aria-current={currentPath === link.href ? 'page' : undefined}
-            >{link.label}</a>
+            <a href={link.href} class="transition-colors hover:text-teal">{link.label}</a>
           </li>
         ))}
+        <li>
+          <a href={profile.social.github} target="_blank" rel="noreferrer" class="transition-colors hover:text-teal">GitHub ↗</a>
+        </li>
       </ul>
     </nav>
   </div>
