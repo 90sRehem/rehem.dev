@@ -74,6 +74,7 @@ const githubChartUrl = `https://ghchart.rshah.org/00d4aa/${profile.social.github
         { threshold: 0.2 },
       );
       groups.forEach((group) => observer.observe(group));
+      document.documentElement.classList.add('js');
     } else {
       groups.forEach((group) => group.classList.add('is-visible'));
     }

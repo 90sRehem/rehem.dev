@@ -228,9 +228,12 @@ a {
 }
 
 .stack-group {
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+html.js .stack-group {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 500ms ease, transform 500ms ease;
 }
 
 .stack-group.is-visible {
