@@ -1,0 +1,9 @@
+# Copy to terraform.tfvars (gitignored) and fill in real values, or pass
+# these as TF_VAR_* environment variables instead of writing them to disk.
+
+cloudflare_api_token   = "your-cloudflare-api-token"
+cloudflare_account_id  = "your-cloudflare-account-id"
+project_name           = "rehem-dev"
+production_branch      = "main"
+github_owner           = "90sRehem"
+github_repo            = "rehem.dev"

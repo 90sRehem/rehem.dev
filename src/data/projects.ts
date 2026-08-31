@@ -1,46 +1,52 @@
 export interface Project {
   title: string;
-  type: string;
   description: string;
-  image: string;
   tags: string[];
   href: string;
-  featured?: boolean;
+  kind: 'projeto' | 'contribuição';
 }
 
 export const projects: Project[] = [
   {
-    title: 'Mosaico',
-    type: 'Produto digital',
-    description: 'Um espaço calmo para organizar referências, ideias e o trabalho que ainda está tomando forma.',
-    image: '/work/mosaico.svg',
-    tags: ['Produto', 'UX/UI', 'Astro'],
-    href: '/projects/mosaico/',
-    featured: true,
+    title: 'design-system',
+    description: 'Sistema de design em TypeScript: componentes, tokens e padrões reutilizáveis entre produtos.',
+    tags: ['TypeScript', 'Design System'],
+    href: 'https://github.com/90sRehem/design-system',
+    kind: 'projeto',
   },
   {
-    title: 'Sinal aberto',
-    type: 'Identidade + web',
-    description: 'Sistema editorial para transformar dados complexos em histórias que qualquer pessoa consegue acompanhar.',
-    image: '/work/sinal-aberto.svg',
-    tags: ['Direção', 'Web design', 'Conteúdo'],
-    href: '/projects/sinal-aberto/',
-    featured: true,
+    title: 'notifications-service',
+    description: 'Serviço de notificações desacoplado, construído para ser plugado em diferentes produtos.',
+    tags: ['TypeScript', 'Node.js', 'Serviços'],
+    href: 'https://github.com/90sRehem/notifications-service',
+    kind: 'projeto',
   },
   {
-    title: 'Ritmo',
-    type: 'Ferramenta interna',
-    description: 'Um painel enxuto para times pequenos verem o que importa, decidirem mais rápido e seguirem em frente.',
-    image: '/work/ritmo.svg',
-    tags: ['Interface', 'Sistemas', 'Frontend'],
-    href: '/projects/ritmo/',
+    title: 'DOE',
+    description: 'Aplicação de registro de doadores com persistência em banco de dados.',
+    tags: ['CSS', 'Full Stack'],
+    href: 'https://github.com/90sRehem/DOE',
+    kind: 'projeto',
   },
   {
-    title: 'Caderno 01',
-    type: 'Experimento',
-    description: 'Uma publicação digital sobre atenção, tecnologia e os pequenos rituais que sustentam bons projetos.',
-    image: '/work/caderno.svg',
-    tags: ['Editorial', 'Pesquisa', 'Web'],
-    href: '/projects/caderno-01/',
+    title: 'conceitos-nodejs',
+    description: 'Aplicação dos conceitos fundamentais de Node.js explorados durante o bootcamp GoStack.',
+    tags: ['JavaScript', 'Node.js'],
+    href: 'https://github.com/90sRehem/conceitos-nodejs',
+    kind: 'projeto',
+  },
+  {
+    title: 'agent-skills',
+    description: 'Skills de engenharia production-grade para agentes de código com IA — contribuição ativa.',
+    tags: ['AI Engineering', 'JavaScript'],
+    href: 'https://github.com/addyosmani/agent-skills',
+    kind: 'contribuição',
+  },
+  {
+    title: 'career-ops',
+    description: 'Busca de emprego com IA open-source: varre vagas, avalia e ajusta currículo direto no CLI. Contribuição ativa.',
+    tags: ['AI Engineering', 'JavaScript'],
+    href: 'https://github.com/santifer/career-ops',
+    kind: 'contribuição',
   },
 ];

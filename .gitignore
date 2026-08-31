@@ -5,3 +5,11 @@ dist/
 .env
 .env.*
 !.env.example
+bun.lock
+
+# Terraform
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.*
+infra/terraform.tfvars
+infra/*.tfplan

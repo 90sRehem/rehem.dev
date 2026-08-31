@@ -227,6 +227,20 @@ a {
   background-size: 18px 18px;
 }
 
+.stack-group {
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+html.js .stack-group {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+html.js .stack-group.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
