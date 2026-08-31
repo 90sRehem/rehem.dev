@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+
+const timeline = [
+  { year: 'agora', title: 'Independente', text: 'Trabalho com pessoas e times que querem transformar uma ideia boa em algo claro, útil e vivo.' },
+  { year: '2022—24', title: 'Produto e interface', text: 'Construção de sistemas, fluxos e experiências digitais em times pequenos, onde cada decisão aparece na tela.' },
+  { year: 'antes', title: 'Curiosidade', text: 'Comunicação, código, escrita e uma coleção crescente de cadernos com perguntas sem resposta.' },
+];
+
+const skills = ['product thinking', 'ux / ui', 'design systems', 'frontend', 'direção visual', 'escrita'];
+---
+
+<Layout title="Sobre — Rehem" description="Conheça Rehem, designer e developer que trabalha entre produto, interface e código.">
+  <section class="site-shell py-20 sm:py-28">
+    <SectionHeading eyebrow="sobre / rehem" title="Eu gosto de deixar as coisas mais claras." intro="Sou uma pessoa generalista com carinho por detalhes. Penso em sistemas, desenho interfaces e escrevo código para que ideias encontrem pessoas do outro lado." />
+    <div class="grid gap-14 border-t-2 border-paper/20 pt-12 lg:grid-cols-[0.7fr_1.3fr]">
+      <div>
+        <p class="eyebrow mb-5">no que acredito</p>
+        <p class="text-2xl font-black leading-tight tracking-[-0.05em] text-paper">Bom trabalho é um exercício de atenção — ao problema, às pessoas e ao que acontece depois do lançamento.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-3">
+        <div class="border-2 border-paper/30 p-5"><p class="font-mono text-3xl text-teal">01</p><h2 class="mt-8 font-black text-paper">Perguntar</h2><p class="mt-3 text-sm leading-6 text-muted">Entender antes de propor. O contexto quase sempre muda a forma da solução.</p></div>
+        <div class="border-2 border-paper/30 p-5"><p class="font-mono text-3xl text-yellow">02</p><h2 class="mt-8 font-black text-paper">Simplificar</h2><p class="mt-3 text-sm leading-6 text-muted">Tirar o que não ajuda até sobrar o que a pessoa precisa para seguir.</p></div>
+        <div class="border-2 border-paper/30 p-5"><p class="font-mono text-3xl text-teal">03</p><h2 class="mt-8 font-black text-paper">Entregar</h2><p class="mt-3 text-sm leading-6 text-muted">Uma ideia só aprende quando encontra o mundo. Por isso, construir faz parte.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y-2 border-paper/20 bg-panel">
+    <div class="site-shell grid gap-12 py-20 sm:py-28 lg:grid-cols-[0.7fr_1.3fr]">
+      <div><p class="eyebrow mb-4">experiência</p><h2 class="section-title text-paper">Um pouco<br /><span class="text-yellow">do caminho.</span></h2></div>
+      <div>{timeline.map((item) => <div class="grid grid-cols-[90px_1fr] gap-5 border-t-2 border-paper/25 py-6 sm:grid-cols-[130px_1fr]"><p class="font-mono text-xs uppercase text-teal">{item.year}</p><div><h3 class="text-xl font-black tracking-[-0.04em] text-paper">{item.title}</h3><p class="mt-2 leading-6 text-muted">{item.text}</p></div></div>)}</div>
+    </div>
+  </section>
+
+  <section class="site-shell py-20 sm:py-28">
+    <div class="grid gap-8 md:grid-cols-[0.7fr_1.3fr] md:items-center"><div><p class="eyebrow mb-4">kit de ferramentas</p><h2 class="section-title text-paper">O que eu<br /><span class="text-teal">levo comigo.</span></h2></div><div class="flex flex-wrap gap-3">{skills.map((skill) => <span class="brutal-border bg-panel px-4 py-3 font-mono text-xs uppercase tracking-wider text-paper">{skill}</span>)}</div></div>
+  </section>
+</Layout>

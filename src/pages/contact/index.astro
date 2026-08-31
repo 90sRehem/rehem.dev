@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { services } from '../../data/services';
+---
+
+<Layout title="Contato — Rehem" description="Conte sobre seu projeto e vamos descobrir juntos o próximo passo.">
+  <section class="site-shell py-20 sm:py-28">
+    <SectionHeading eyebrow="contato / oi" title="Vamos tirar isso da cabeça e colocar no mundo." intro="Me conte o que você está tentando fazer. Respondo em até dois dias úteis com uma ideia de caminho — mesmo que o caminho não precise de mim." />
+    <div class="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
+      <aside>
+        <p class="eyebrow mb-5">posso ajudar com</p>
+        <ul class="space-y-4">{services.map((service) => <li class="flex gap-3 border-b border-paper/20 pb-4 text-paper"><span class="font-mono text-xs text-teal">{service.number}</span><span>{service.title}</span></li>)}</ul>
+        <p class="mt-10 text-sm leading-6 text-muted">Prefere escrever direto? <a class="text-teal underline decoration-2 underline-offset-4" href="mailto:hello@rehem.dev">hello@rehem.dev</a></p>
+      </aside>
+      <form class="brutal-card bg-panel p-6 sm:p-8" action="https://formsubmit.co/hello@rehem.dev" method="POST">
+        <input type="hidden" name="_subject" value="Novo projeto pelo rehem.dev" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_next" value="https://rehem.dev/contact/thanks/" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+        <div class="grid gap-6 sm:grid-cols-2">
+          <label class="block"><span class="eyebrow mb-2 block text-paper">seu nome</span><input required type="text" name="name" autocomplete="name" placeholder="Como posso te chamar?" class="w-full border-2 border-paper/40 bg-ink px-3 py-3 text-paper placeholder:text-muted focus:border-teal focus:outline-none" /></label>
+          <label class="block"><span class="eyebrow mb-2 block text-paper">seu email</span><input required type="email" name="email" autocomplete="email" placeholder="voce@exemplo.com" class="w-full border-2 border-paper/40 bg-ink px-3 py-3 text-paper placeholder:text-muted focus:border-teal focus:outline-none" /></label>
+        </div>
+        <label class="mt-6 block"><span class="eyebrow mb-2 block text-paper">tipo de projeto</span><select required name="project_type" class="w-full border-2 border-paper/40 bg-ink px-3 py-3 text-paper focus:border-teal focus:outline-none"><option value="">Escolha uma opção</option><option>Produto do zero</option><option>Design de interface</option><option>Identidade e site</option><option>Consultoria</option><option>Outro</option></select></label>
+        <label class="mt-6 block"><span class="eyebrow mb-2 block text-paper">a mensagem</span><textarea required name="message" rows="6" placeholder="O que você está construindo?" class="w-full resize-y border-2 border-paper/40 bg-ink px-3 py-3 text-paper placeholder:text-muted focus:border-teal focus:outline-none"></textarea></label>
+        <button type="submit" class="brutal-button mt-7">Enviar mensagem <span aria-hidden="true">↗</span></button>
+        <p class="mt-5 font-mono text-[0.65rem] leading-5 text-muted">Ao enviar, você será direcionado para uma confirmação segura do formulário.</p>
+      </form>
+    </div>
+  </section>
+</Layout>
