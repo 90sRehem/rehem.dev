@@ -236,7 +236,7 @@ html.js .stack-group {
   transform: translateY(16px);
 }
 
-.stack-group.is-visible {
+html.js .stack-group.is-visible {
   opacity: 1;
   transform: translateY(0);
 }

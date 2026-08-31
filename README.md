@@ -22,7 +22,7 @@ componentes Astro.
 ## Conteúdo
 
 - Perfil, bio e links sociais: `src/data/profile.ts`.
-- Projetos em destaque: `src/data/projects.ts`.
+- Projetos e contribuições: `src/data/projects.ts`.
 - Stack técnico: `src/data/stack.ts`.
 
 Todo o conteúdo é real — sem projetos fictícios, sem timeline de experiência
