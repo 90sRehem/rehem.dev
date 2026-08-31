@@ -36,9 +36,18 @@ O deploy é gerenciado como infraestrutura via Terraform, em `infra/`.
 
 ```bash
 cd infra
-terraform init
+export TF_ORGANIZATION="sua-organizacao"
+export TF_WORKSPACE="rehem-dev"
+terraform init \
+  -backend-config="organization=$TF_ORGANIZATION" \
+  -backend-config="workspaces.name=$TF_WORKSPACE"
 terraform apply
 ```
+
+O workspace remoto deve usar execução **Local** no Terraform Cloud, para que os
+comandos rodem nesta máquina enquanto o estado permanece remoto. Autentique o
+Terraform CLI no Terraform Cloud antes do `init` (por exemplo, com
+`terraform login`).
 
 Antes do primeiro apply, conecte a conta GitHub ao Cloudflare em **Workers & Pages →
 Create application → Pages → Connect to Git**. Essa autorização é necessária
@@ -59,8 +68,9 @@ Um workflow do GitHub Actions (`.github/workflows/terraform.yml`) roda
 automaticamente em push para `main`. Requer os secrets `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` e
 `TF_API_TOKEN`, além das variáveis de repositório `TF_ORGANIZATION` e
 `TF_WORKSPACE`. O estado é armazenado no workspace remoto do Terraform Cloud;
-crie esse workspace antes do primeiro deploy. A conexão GitHub com o Cloudflare
-continua sendo uma configuração externa obrigatória. Em pull requests de forks, o
+crie esse workspace antes do primeiro deploy e configure-o para execução Local.
+A conexão GitHub com o Cloudflare continua sendo uma configuração externa
+obrigatória. Em pull requests de forks, o
 workflow executa apenas validações quando os secrets não estão disponíveis.
 
 ### Deploy manual (fallback)

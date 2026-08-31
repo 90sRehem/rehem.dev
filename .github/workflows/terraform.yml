@@ -57,8 +57,12 @@ jobs:
         shell: bash
         run: |
           if [ -z "$TF_VAR_cloudflare_api_token" ] || [ -z "$TF_VAR_cloudflare_account_id" ]; then
-            echo "Skipping Terraform plan because Cloudflare credentials are unavailable."
-            exit 0
+            if [ "$GITHUB_EVENT_NAME" = "pull_request" ] && [ "$TF_TRUSTED_PR" != "true" ]; then
+              echo "Skipping Terraform plan because Cloudflare credentials are unavailable."
+              exit 0
+            fi
+            echo "Cloudflare credentials are required for this Terraform plan."
+            exit 1
           fi
           terraform plan -no-color -input=false
 
