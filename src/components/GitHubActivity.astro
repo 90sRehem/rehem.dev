@@ -1,0 +1,509 @@
+---
+interface Props {
+  username: string;
+  profileUrl: string;
+}
+
+const { username, profileUrl } = Astro.props;
+---
+
+<div class="github-activity" data-username={username}>
+  <div class="gha-header">
+    <span class="gha-label">Contribuições públicas · últimos 12 meses</span>
+    <a class="gha-profile-link" href={profileUrl} target="_blank" rel="noreferrer">
+      Ver @{username} no GitHub <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <div class="gha-loading" id={`gha-loading-${username}`}>
+    <span class="gha-loading-spinner" aria-hidden="true"></span>
+    Sincronizando com o GitHub…
+  </div>
+
+  <div class="gha-calendar-wrapper" id={`gha-calendar-${username}`} hidden>
+    <div class="gha-calendar-scroll">
+      <div class="gha-calendar" id={`gha-calendar-grid-${username}`}></div>
+    </div>
+
+    <div class="gha-footer">
+      <div class="gha-legend">
+        <span>Menos</span>
+        <span class="gha-legend-cells">
+          <span class="gha-legend-cell" data-level="0"></span>
+          <span class="gha-legend-cell" data-level="1"></span>
+          <span class="gha-legend-cell" data-level="2"></span>
+          <span class="gha-legend-cell" data-level="3"></span>
+          <span class="gha-legend-cell" data-level="4"></span>
+        </span>
+        <span>Mais</span>
+      </div>
+      <div class="gha-total" id={`gha-total-${username}`}></div>
+    </div>
+  </div>
+
+  <div class="gha-error" id={`gha-error-${username}`} hidden>
+    Não foi possível carregar as contribuições.
+    <a href={`${profileUrl}?tab=overview`} target="_blank" rel="noreferrer">
+      Ver atividade direto no GitHub ↗
+    </a>
+  </div>
+</div>
+
+<style is:global>
+  .github-activity {
+    font-family: var(--font-mono, "Courier New", Courier, monospace);
+  }
+
+  .gha-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .gha-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+
+  .gha-profile-link {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #00d4aa;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .gha-profile-link:hover {
+    color: #ffd166;
+  }
+
+  .gha-loading {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 2rem 0;
+    color: #9ca3af;
+    font-size: 0.8rem;
+  }
+
+  .gha-loading-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #9ca3af;
+    border-top-color: #00d4aa;
+    border-radius: 50%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gha-loading-spinner {
+      border-top-color: #9ca3af;
+      animation: none;
+    }
+  }
+
+  .gha-loading-spinner {
+    animation: gha-spin 0.8s linear infinite;
+  }
+
+  @keyframes gha-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .gha-calendar-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #3a3a55 transparent;
+    padding-bottom: 0.25rem;
+  }
+
+  .gha-calendar-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .gha-calendar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .gha-calendar-scroll::-webkit-scrollbar-thumb {
+    background: #3a3a55;
+    border-radius: 3px;
+  }
+
+  .gha-calendar {
+    display: inline-grid;
+    grid-template-rows: repeat(7, 16px);
+    grid-auto-flow: column;
+    grid-auto-columns: 16px;
+    gap: 4px;
+    min-width: min-content;
+  }
+
+  .gha-month-labels {
+    display: inline-grid;
+    grid-template-rows: repeat(7, 16px);
+    grid-auto-flow: column;
+    grid-auto-columns: 16px;
+    gap: 4px;
+    margin-bottom: 4px;
+    position: relative;
+    height: 16px;
+    font-size: 0.7rem;
+    color: #6b7280;
+  }
+
+  .gha-day-labels {
+    display: grid;
+    grid-template-rows: repeat(7, 16px);
+    gap: 4px;
+    margin-right: 4px;
+    font-size: 0.6rem;
+    color: #6b7280;
+    line-height: 16px;
+    text-align: right;
+    padding-right: 4px;
+  }
+
+  .gha-calendar-container {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .gha-cell {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    outline: 1px solid rgba(255, 255, 255, 0.04);
+    outline-offset: -1px;
+    cursor: default;
+  }
+
+  .gha-cell[data-level="0"] {
+    background: #1a1a2e;
+  }
+
+  .gha-cell[data-level="1"] {
+    background: #00d4aa33;
+  }
+
+  .gha-cell[data-level="2"] {
+    background: #00d4aa66;
+  }
+
+  .gha-cell[data-level="3"] {
+    background: #00d4aa99;
+  }
+
+  .gha-cell[data-level="4"] {
+    background: #00d4aa;
+  }
+
+  .gha-cell:hover {
+    outline: 1px solid #00d4aa;
+  }
+
+  .gha-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .gha-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.6rem;
+    color: #6b7280;
+  }
+
+  .gha-legend-cells {
+    display: flex;
+    gap: 2px;
+  }
+
+  .gha-legend-cell {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 2px;
+  }
+
+  .gha-legend-cell[data-level="0"] { background: #1a1a2e; }
+  .gha-legend-cell[data-level="1"] { background: #00d4aa33; }
+  .gha-legend-cell[data-level="2"] { background: #00d4aa66; }
+  .gha-legend-cell[data-level="3"] { background: #00d4aa99; }
+  .gha-legend-cell[data-level="4"] { background: #00d4aa; }
+
+  .gha-total {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #00d4aa;
+    letter-spacing: 0.04em;
+  }
+
+  .gha-error {
+    padding: 1.5rem 0;
+    color: #9ca3af;
+    font-size: 0.8rem;
+  }
+
+  .gha-error a {
+    color: #ffd166;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .gha-error a:hover {
+    color: #00d4aa;
+  }
+
+  .gha-month-row {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 20px;
+    gap: 0;
+    margin-bottom: 4px;
+    margin-left: 28px;
+    font-size: 0.7rem;
+    color: #6b7280;
+  }
+
+  .gha-month-row > span {
+    display: block;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: visible;
+  }
+
+  .gha-calendar-scroll {
+    min-width: 0;
+  }
+</style>
+
+<script>
+  interface Contribution {
+    date: string;
+    count: number;
+    level: number;
+  }
+
+  interface ApiResponse {
+    total: number;
+    contributions: Contribution[];
+  }
+
+  const MONTHS_PT = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+  const DAYS_PT = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  const FETCH_TIMEOUT_MS = 15000;
+
+  function normalizeLevel(raw: unknown): number {
+    const n = typeof raw === 'number' ? raw : parseInt(String(raw), 10);
+    if (Number.isNaN(n) || n < 0 || n > 4) return 0;
+    return n;
+  }
+
+  function renderCalendar(username: string, total: number, contributions: Contribution[]) {
+    const container = document.getElementById(`gha-calendar-grid-${username}`);
+    const loadingEl = document.getElementById(`gha-loading-${username}`);
+    const calendarWrapper = document.getElementById(`gha-calendar-${username}`);
+    const errorEl = document.getElementById(`gha-error-${username}`);
+    const totalEl = document.getElementById(`gha-total-${username}`);
+
+    if (!container || !loadingEl || !calendarWrapper || !errorEl) return;
+
+    if (contributions.length === 0) {
+      loadingEl.hidden = true;
+      errorEl.hidden = false;
+      return;
+    }
+
+    // Build a map: date string -> contribution (skip invalid entries)
+    const contribMap = new Map<string, Contribution>();
+    for (const c of contributions) {
+      // Validate date string: must be non-empty, parseable, and produce a valid Date
+      if (typeof c.date !== 'string' || !c.date) continue;
+      const parsed = new Date(c.date + 'T00:00:00Z');
+      if (Number.isNaN(parsed.getTime())) continue;
+
+      const level = normalizeLevel(c.level);
+      const count = typeof c.count === 'number' && !Number.isNaN(c.count) ? Math.max(0, c.count) : 0;
+      contribMap.set(c.date, { ...c, level, count });
+    }
+
+    // Determine date range from validated entries only
+    const validDates = [...contribMap.values()]
+      .map(c => new Date(c.date + 'T00:00:00Z'))
+      .sort((a, b) => a.getTime() - b.getTime());
+    if (validDates.length === 0) {
+      loadingEl.hidden = true;
+      errorEl.hidden = false;
+      return;
+    }
+    const dates = validDates;
+    const startDate = dates[0];
+    const endDate = dates[dates.length - 1];
+
+    // Align start to the previous Sunday
+    const alignedStart = new Date(startDate);
+    alignedStart.setUTCDate(alignedStart.getUTCDate() - alignedStart.getUTCDay());
+
+    // Align end to the next Saturday
+    const alignedEnd = new Date(endDate);
+    alignedEnd.setUTCDate(alignedEnd.getUTCDate() + (6 - alignedEnd.getUTCDay()));
+
+    // Build weeks
+    const weeks: Date[][] = [];
+    let current = new Date(alignedStart);
+    while (current <= alignedEnd) {
+      const week: Date[] = [];
+      for (let d = 0; d < 7; d++) {
+        week.push(new Date(current));
+        current.setUTCDate(current.getUTCDate() + 1);
+      }
+      weeks.push(week);
+    }
+
+    // Build month labels
+    const monthLabels: { weekIndex: number; month: string }[] = [];
+    let lastMonth = -1;
+    for (let w = 0; w < weeks.length; w++) {
+      const firstDay = weeks[w][0];
+      const month = firstDay.getUTCMonth();
+      if (month !== lastMonth) {
+        monthLabels.push({ weekIndex: w, month: MONTHS_PT[month] });
+        lastMonth = month;
+      }
+    }
+
+    // Render month labels row
+    const monthRow = document.createElement('div');
+    monthRow.className = 'gha-month-row';
+    // Create a grid that matches the calendar columns
+    monthRow.style.gridTemplateColumns = `28px repeat(${weeks.length}, 20px)`;
+    for (const ml of monthLabels) {
+      const span = document.createElement('span');
+      span.textContent = ml.month;
+      span.style.gridColumn = `${ml.weekIndex + 2}`;
+      monthRow.appendChild(span);
+    }
+    container.parentElement?.insertBefore(monthRow, container.parentElement?.firstChild || null);
+
+    // Render day labels (left side)
+    const dayLabelsContainer = document.createElement('div');
+    dayLabelsContainer.className = 'gha-day-labels';
+    // Show labels only for Mon, Wed, Fri (indices 1, 3, 5)
+    for (let d = 0; d < 7; d++) {
+      const label = document.createElement('div');
+      if (d === 1 || d === 3 || d === 5) {
+        label.textContent = DAYS_PT[d];
+      }
+      dayLabelsContainer.appendChild(label);
+    }
+
+    // Wrap calendar in a container with day labels
+    const wrapper = document.createElement('div');
+    wrapper.className = 'gha-calendar-container';
+    wrapper.appendChild(dayLabelsContainer);
+    container.parentElement?.insertBefore(wrapper, container);
+    wrapper.appendChild(container);
+
+    // Set grid columns on calendar to match weeks
+    container.style.gridAutoColumns = '16px';
+
+    // Render cells
+    for (const week of weeks) {
+      for (const day of week) {
+        const cell = document.createElement('div');
+        cell.className = 'gha-cell';
+        const dateStr = day.toISOString().split('T')[0];
+        const contrib = contribMap.get(dateStr);
+        const level = contrib ? contrib.level : 0;
+        const count = contrib ? contrib.count : 0;
+        cell.setAttribute('data-level', String(level));
+        cell.setAttribute('role', 'img');
+        const dateOpts = { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' } as const;
+        const displayDate = day.toLocaleDateString('pt-BR', dateOpts);
+        cell.setAttribute('aria-label', `${count} contribuição${count !== 1 ? 'ões' : ''} em ${displayDate}`);
+        cell.title = `${count} contribuição${count !== 1 ? 'ões' : ''} — ${displayDate}`;
+        container.appendChild(cell);
+      }
+    }
+
+    // Update total
+    if (totalEl) {
+      totalEl.textContent = `${total.toLocaleString('pt-BR')} contribuições`;
+    }
+
+    // Show calendar, hide loading
+    loadingEl.hidden = true;
+    calendarWrapper.hidden = false;
+  }
+
+  async function fetchContributions(username: string) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+    try {
+      const url = `https://github-contributions-api.jogruber.de/v4/${username}?y=last`;
+      const response = await fetch(url, {
+        signal: controller.signal,
+        headers: { 'Accept': 'application/json' },
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const data: unknown = await response.json();
+
+      // Validate payload
+      if (
+        typeof data !== 'object' ||
+        data === null ||
+        !('total' in data) ||
+        !('contributions' in data) ||
+        !Array.isArray((data as ApiResponse).contributions)
+      ) {
+        throw new Error('Invalid response format');
+      }
+
+      const apiData = data as ApiResponse;
+      const total = typeof apiData.total === 'number' ? apiData.total : apiData.contributions.reduce((sum, c) => sum + (c.count || 0), 0);
+
+      renderCalendar(username, total, apiData.contributions);
+    } catch (err) {
+      clearTimeout(timeoutId);
+      const loadingEl = document.getElementById(`gha-loading-${username}`);
+      const errorEl = document.getElementById(`gha-error-${username}`);
+      if (loadingEl) loadingEl.hidden = true;
+      if (errorEl) errorEl.hidden = false;
+    }
+  }
+
+  // Find all GitHub activity containers on the page
+  document.querySelectorAll('.github-activity').forEach((el) => {
+    const username = el.getAttribute('data-username');
+    if (username) {
+      fetchContributions(username);
+    }
+  });
+</script>

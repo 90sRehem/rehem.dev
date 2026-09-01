@@ -8,65 +8,42 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'design-system',
-    description: 'Sistema de design em TypeScript: componentes, tokens e padrões reutilizáveis entre produtos.',
-    tags: ['TypeScript', 'Design System'],
-    href: 'https://github.com/90sRehem/design-system',
-    kind: 'projeto',
-  },
-  {
-    title: 'notifications-service',
-    description: 'Serviço de notificações desacoplado, construído para ser plugado em diferentes produtos.',
-    tags: ['TypeScript', 'Node.js', 'Serviços'],
-    href: 'https://github.com/90sRehem/notifications-service',
-    kind: 'projeto',
-  },
-  {
-    title: 'DOE',
-    description: 'Aplicação de registro de doadores com persistência em banco de dados.',
-    tags: ['CSS', 'Full Stack'],
-    href: 'https://github.com/90sRehem/DOE',
-    kind: 'projeto',
-  },
-  {
-    title: 'conceitos-nodejs',
-    description: 'Aplicação dos conceitos fundamentais de Node.js explorados durante o bootcamp GoStack.',
-    tags: ['JavaScript', 'Node.js'],
-    href: 'https://github.com/90sRehem/conceitos-nodejs',
-    kind: 'projeto',
-  },
-  {
-    title: 'agent-skills',
-    description: 'Skills de engenharia para agentes de código com IA.',
-    tags: ['AI Engineering', 'JavaScript'],
-    href: 'https://github.com/addyosmani/agent-skills',
-    kind: 'contribuição',
-  },
-  {
-    title: 'career-ops',
-    description: 'Busca de emprego com IA open source: varre portais, avalia vagas, ajusta o currículo e acompanha candidaturas no CLI.',
-    tags: ['AI Engineering', 'JavaScript'],
-    href: 'https://github.com/santifer/career-ops',
-    kind: 'contribuição',
-  },
-  {
-    title: 'harness',
-    description: 'Harness multiagente para o Pi, com guardas, verificação, avaliações, resiliência, memória e roteamento por código.',
-    tags: ['AI Engineering', 'TypeScript'],
-    href: 'https://github.com/runecraftai/harness',
-    kind: 'projeto',
-  },
-  {
     title: 'squad',
-    description: 'Distro de agentes para executar trabalho de código com operadores visíveis, worktrees isolados e sessões supervisionadas.',
-    tags: ['AI Engineering', 'TypeScript'],
+    description:
+      'Distribuição de agentes que coordena trabalho paralelo em worktrees git isoladas, supervisiona a execução e entrega PRs revisados ou relatórios de investigação.',
+    tags: ['Shell', 'Multi-agent', 'Worktrees'],
     href: 'https://github.com/runecraftai/squad',
     kind: 'projeto',
   },
   {
+    title: 'pi-extensions',
+    description:
+      'Monorepo de extensões para o agente Pi — TUI unificada e customizável (header, footer, editor) e ferramentas de consulta ao knowledge graph via graphify.',
+    tags: ['TypeScript', 'Pi', 'TUI'],
+    href: 'https://github.com/runecraftai/pi-extensions',
+    kind: 'projeto',
+  },
+  {
+    title: 'harness',
+    description:
+      'Harness multiagente para agentes de código: subagentes com gates, workflows DAG verificáveis, goal-loop com auditor isolado e revisão paralela de PRs.',
+    tags: ['TypeScript', 'Agents', 'Verification'],
+    href: 'https://github.com/runecraftai/harness',
+    kind: 'projeto',
+  },
+  {
+    title: 'career-coach',
+    description:
+      'Aplicação web de auditoria de currículo e LinkedIn, com score, diagnóstico de lacunas e sugestões objetivas de melhoria para o perfil profissional.',
+    tags: ['Web', 'Resume', 'LinkedIn'],
+    href: 'https://github.com/runecraftai/career-coach',
+    kind: 'projeto',
+  },
+  {
     title: 'arcanum',
-    description: 'Monorepo das ferramentas Runecraft para OpenCode, com pacotes de orquestração, skills, instalação e visibilidade no terminal.',
-    tags: ['AI Engineering', 'TypeScript'],
+    description:
+      'Monorepo dos plugins de agentes OpenCode — Spells (17 skills), Summon (CLI de instalação), Runes (memória SQLite), Guild (8 agentes orquestrados) e Spawn (tmux pane).',
+    tags: ['TypeScript', 'OpenCode', 'Agents'],
     href: 'https://github.com/runecraftai/arcanum',
     kind: 'projeto',
   },

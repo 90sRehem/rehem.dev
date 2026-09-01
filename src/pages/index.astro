@@ -2,11 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import StackGroup from '../components/StackGroup.astro';
+import GitHubActivity from '../components/GitHubActivity.astro';
 import { profile, bio } from '../data/profile';
 import { projects } from '../data/projects';
 import { stack } from '../data/stack';
-
-const githubChartUrl = `https://ghchart.rshah.org/00d4aa/${profile.social.github.split('/').pop()}`;
 ---
 
 <Layout>
@@ -32,7 +31,7 @@ const githubChartUrl = `https://ghchart.rshah.org/00d4aa/${profile.social.github
           <div class="flex justify-between font-mono text-xs text-teal"><span>~/rehem</span><span>dev desde 2020</span></div>
           <div>
             <p class="font-mono text-xs uppercase tracking-widest text-yellow">$ whoami</p>
-            <p class="mt-3 text-4xl font-black leading-[0.9] tracking-[-0.07em] text-paper sm:text-5xl">Código<br />→ produto<br />→ <span class="text-teal">IA</span>.</p>
+            <p class="mt-3 text-4xl font-black leading-[0.9] tracking-[-0.07em] text-paper sm:text-5xl">Engenharia<br />→ código<br />→ <span class="text-teal">IA</span>.</p>
           </div>
           <div class="flex items-end justify-between border-t border-paper/30 pt-4 font-mono text-[0.65rem] uppercase text-muted"><span>ai engineering / dev productivity</span><span>✳</span></div>
         </div>
@@ -84,9 +83,8 @@ const githubChartUrl = `https://ghchart.rshah.org/00d4aa/${profile.social.github
   <section id="atividade" class="site-shell py-24 sm:py-32">
     <p class="eyebrow mb-4">03 / atividade</p>
     <h2 class="section-title text-paper">Sempre tem algo<br /><span class="text-teal">em progresso.</span></h2>
-    <div class="brutal-card mt-12 overflow-x-auto bg-panel p-6 sm:p-8">
-      <img src={githubChartUrl} alt="Gráfico de contribuições no GitHub de 90sRehem" width="663" height="104" loading="lazy" class="min-w-[663px]" />
-      <a href={`${profile.social.github}?tab=repositories`} target="_blank" rel="noreferrer" class="mt-6 inline-block font-mono text-xs font-bold uppercase tracking-wider text-teal underline decoration-2 underline-offset-4 hover:text-paper">Ver os 106 repositórios ↗</a>
+    <div class="brutal-card mt-12 bg-panel p-6 sm:p-8">
+      <GitHubActivity username="90sRehem" profileUrl={profile.social.github} />
     </div>
   </section>
 
@@ -94,7 +92,7 @@ const githubChartUrl = `https://ghchart.rshah.org/00d4aa/${profile.social.github
     <div class="site-shell scroll-mt-20 grid gap-12 py-20 sm:py-28 lg:grid-cols-[0.7fr_1.3fr]">
       <div>
         <p class="eyebrow mb-4">04 / sobre</p>
-        <h2 class="section-title text-paper">Do código<br /><span class="text-yellow">à IA.</span></h2>
+        <h2 class="section-title text-paper">Engenharia<br /><span class="text-yellow">que entrega.</span></h2>
       </div>
       <div class="max-w-2xl space-y-5 text-lg leading-8 text-muted">
         {bio.map((paragraph) => <p>{paragraph}</p>)}
