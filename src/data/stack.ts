@@ -4,5 +4,5 @@ export const stack = [
   { category: 'Mobile', items: ['React Native'] },
   { category: 'Cloud', items: ['AWS Lambda', 'Terraform', 'PostgreSQL', 'Redis'] },
   { category: 'AI/ML', items: ['AI Engineering'] },
-  { category: 'Arquitetura', items: ['Microfrontends (Single-SPA)'] },
+  { category: 'Arquitetura', items: ['Microservices', 'Modular monoliths', 'Microfrontends (Single-SPA)'] },
 ];
